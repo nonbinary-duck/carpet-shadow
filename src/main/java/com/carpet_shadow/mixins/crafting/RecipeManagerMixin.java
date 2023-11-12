@@ -29,7 +29,8 @@ public class RecipeManagerMixin {
     @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap;builder()Lcom/google/common/collect/ImmutableMap$Builder;", shift = At.Shift.BY, by=2))
     private void addShadowRecipe(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci, @Local(ordinal = 1) Map<RecipeType<?>, ImmutableMap.Builder<Identifier, Recipe<?>>> map2, @Local(ordinal = 0) ImmutableMap.Builder<Identifier, Recipe<?>> builder){
         Identifier identifier = new Identifier("carpet_shadow","shadow_recipe");
-        Recipe<?> recipe = new BookCloningRecipe(identifier,  CraftingRecipeCategory.MISC) {
+        
+        Recipe<?> recipe = new BookCloningRecipe(CraftingRecipeCategory.MISC) {
             @Override
             public boolean matches(RecipeInputInventory inventory, World world) {
                 if (CarpetShadowSettings.shadowItemMode== CarpetShadowSettings.Mode.UNLINK || !CarpetShadowSettings.shadowCraftingGeneration)
